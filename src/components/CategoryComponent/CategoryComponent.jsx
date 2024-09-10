@@ -10,13 +10,14 @@ export default function CategoryComponent({
   const [products, setProducts] = useState([]);
 
   useEffect(()=>{
+    setProducts([])
     axios(
       limit
       ? `https://fakestoreapi.com/products/category/${category}?limit=${limit}`
       : `https://fakestoreapi.com/products/category/${category}`
     )
     .then(({data})=> setProducts(data));
-  }, [])
+  }, [category, limit])
   return (
     <div className="category-component">
       <div className="container">
