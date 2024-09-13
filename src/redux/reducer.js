@@ -20,6 +20,8 @@ export const getCategories = () =>{
     }
 }
 export const addCart = createAction(ADD_CART);
+export const decrementCart = createAction(DECREMENT_CART);
+export const deleteCart = createAction(DELETE_CART);
 
 export default createReducer(initialState, (builder) =>{
     builder
@@ -39,5 +41,12 @@ export default createReducer(initialState, (builder) =>{
             ...state.cart
         ]
     }
+   })
+   .addCase(DECREMENT_CART, (state, action) =>{
+    const idx = state.cart.findIndex(item => item.id === action.payload.id);
+    state.cart[idx].count--
+   })
+   .addCase(DELETE_CART, (state, action)=>{
+    state.cart = state.cart.filter(item => item.id !== action.payload)
    })
 })
